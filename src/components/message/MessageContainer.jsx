@@ -8,7 +8,7 @@ export const MessageContainer = () => {
   const { activeChatId } = useChatStore();
 
   return (
-    <div className="md:min-w-[450px] flex flex-col">
+    <div className="w-full flex flex-col">
       {!activeChatId ? (
         <NoChatSelected />
       ) : (
