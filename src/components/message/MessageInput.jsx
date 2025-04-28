@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useChatStore } from "../../zustand/useChatStore";
+import { IoIosSend } from "react-icons/io";
 
 export const MessageInput = () => {
   const [message, setMessage] = useState("");
@@ -24,8 +25,10 @@ export const MessageInput = () => {
         />
         <button
           type="submit"
-          className="absolute inset-y-0 end-0 flex items-center pe-3"
-        ></button>
+          className="absolute inset-y-0 end-0 flex items-center p-2 cursor-pointer hover:bg-gray-600 transition-colors duration-300 rounded-lg"
+        >
+          <IoIosSend className="w-6 h-6 text-slate-300" />
+        </button>
       </div>
     </form>
   );
