@@ -6,7 +6,15 @@ export const useGetMessages = () => {
   const [loading, setLoading] = useState(false);
   const [newMessages, setNewMessages] = useState([]);
   const { chats, activeChatId, addMessage } = useChatStore();
+  const [chatId, setChatId] = useState(null);
 
+  // reset newMessages when activeChatId changes
+  useEffect(() => {
+    if (activeChatId !== chatId) setNewMessages([]);
+  }, [activeChatId, chatId]);
+
+
+  // if the last message is from the user, send a bot message
   useEffect(() => {
     if (newMessages.length === 0) return;
       if (newMessages[newMessages.length - 1].sender === "user") {
@@ -19,17 +27,21 @@ export const useGetMessages = () => {
           };
           addMessage(activeChatId, botMessage);
           setNewMessages((prev) => [...prev, botMessage]);
+      setChatId(activeChatId);
         }, 1000);
       }
   }, [activeChatId, addMessage, newMessages]);
 
+
+  // get messages
   useEffect(() => {
     const getMessages = async () => {
       setLoading(true);
       try {
         const messages = await new Promise((resolve) => {
           setTimeout(() => {
-            const foundMessages = chats.find((chat) => chat.id === activeChatId)?.messages || [];
+            const foundMessages =
+              chats.find((chat) => chat.id === activeChatId)?.messages || [];
             resolve(foundMessages);
           }, 2000);
         });

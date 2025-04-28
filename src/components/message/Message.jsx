@@ -1,7 +1,6 @@
 import { extractTime } from "../../utils/extractTime";
 
 export const Message = ({ message }) => {
-    
   const { sender, text, createdAt, shouldShake } = message;
 
   const fromMe = sender === "user";
@@ -13,12 +12,8 @@ export const Message = ({ message }) => {
 
   return (
     <div className={`chat ${chatClassName}`}>
-      <div className="chat-image avatar">
-        <div className="w-10 rounded-full">
-        </div>
-      </div>
       <div
-        className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2`}
+        className={`chat-bubble text-white ${bubbleBgColor} ${shakeClass} pb-2 max-w-xs sm:max-w-sm break-words whitespace-pre-wrap`}
       >
         {text}
       </div>

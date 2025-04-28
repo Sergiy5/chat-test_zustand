@@ -1,30 +1,5 @@
 import { create } from "zustand";
 
-// type Message = {
-//   id: string,
-//   sender: "user" | "bot",
-//   text: string,
-//   timestamp: number,
-// };
-
-// type Chat = {
-//   id: string,
-//   title: string, // optional, like "Chat with Bot #1"
-//   messages: Message[],
-// };
-
-// type ChatStore = {
-//   chats: Chat[],
-//   activeChatId: string | null,
-//   createChat: (title: string) => void,
-//   addMessage: (
-//     chatId: string,
-//     message: Omit<Message, "id" | "timestamp">
-//   ) => void,
-//   setActiveChat: (chatId: string) => void,
-//   clearMessages: (chatId: string) => void,
-// };
-
 export const useChatStore = create((set) => ({
   chats: [],
   activeChatId: null,
@@ -57,7 +32,7 @@ export const useChatStore = create((set) => ({
         const isFirstMessage = chat.messages.length === 0;
         const newTitle = isFirstMessage
           ? message.text.length > 20
-            ? message.text.slice(0, 20) + "..."
+            ? message.text.slice(0, 10) + "..."
             : message.text
           : chat.title;
 
